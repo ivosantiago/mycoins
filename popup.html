@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My Crypto Coins</title>
+    <style type="text/css">
+      body {
+        margin: 10px;
+        white-space: nowrap;
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+      
+      .title {
+        font-size: 16px;
+      }
+      
+      .card {
+        padding-bottom: 5px;
+        border-bottom: 1px solid gray;
+      }
+      
+      .card:last-child {
+        border-bottom: none;
+      }
+
+      .card h2{
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 class="title">Cota&ccedil;&otilde;es de refer&ecirc;ncia</h1>
+    <div class="container">
+      <div class="card">
+        <h2>D&oacute;lar Comercial</h2>
+        <span id="usd-com">$ 12.213,00</span>
+      </div>
+      <div class="card">
+        <h2>D&oacute;lar Bitcoin</h2>
+        <span id="usd-btc">$ 12.213,00</span>
+      </div>
+      <div class="card">
+        <h2>BTCUSD</h2>
+        <span id="btc-usd">$ 12.213,00</span>
+      </div>
+      <div class="card">
+        <h2>Bitwage</h2>
+        <span id="bitwage">$ 12.213,00</span>
+      </div>
+      <div class="card">
+        <h2>Blockchain</h2>
+        <span id="blockchain">$ 12.213,00</span>
+      </div>
+      <div class="card">
+        <h2>FoxBit</h2>
+        <span id="foxbit">R$ 12.213,00</span>
+      </div>
+    </div>
+    <!--
+          - JavaScript and HTML must be in separate files: see our Content Security
+          - Policy documentation[1] for details and explanation.
+          -
+          - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+        -->
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+
+    "name": "My Coins",
+    "description": "This extension allows the user to follow the prices of cryptocurrencies",
+    "version": "1.0",
+
+    "background": {
+      "persistent": false,
+      "scripts": [
+        "background.js"
+      ]
+    },
+    "browser_action": {
+      "default_icon": "btc-icon.png",
+      "default_title": "My Coins",
+      "default_popup": "popup.html"
+    },
+    "permissions": [
+      "alarms"
+    ]
+  }

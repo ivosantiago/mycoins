@@ -1,16 +1,14 @@
-
-const EXCHANGE = 'FOX'; //Foxbit. Change it to map to multiple options.
-const ticker = 'ticker_1h'; //Change it to 1h, 12h, 24h
-let pollIntervalInMin = 1;  // 1 minute
+const EXCHANGE = "FOX"; //Foxbit. Change it to map to multiple options.
+const ticker = "ticker_1h"; //Change it to 1h, 12h, 24h
+let pollIntervalInMin = 1; // 1 minute
 
 function updatePopup(exchangeValues) {
   chrome.runtime.sendMessage({
     msg: "update_exchanges",
     data: {
-      "FOX": exchangeValues
+      FOX: exchangeValues
     }
   });
-
 }
 
 function setPositiveBadge() {
@@ -33,9 +31,9 @@ function setDefaultBadge() {
 }
 
 function updateIcon(exchangeValues) {
-  (!exchangeValues)
-    ? setDefaultBadge() 
-    : (exchangeValues.last >= exchangeValues.open) 
+  !exchangeValues
+    ? setDefaultBadge()
+    : exchangeValues.last >= exchangeValues.open
       ? setPositiveBadge()
       : setNegativeBadge();
 
@@ -43,24 +41,28 @@ function updateIcon(exchangeValues) {
 }
 
 function getTicker() {
-  const URL = 'https://api.bitvalor.com/v1/ticker.json';
-  return fetch(URL).then((response) => {
+  const URL = "https://api.bitvalor.com/v1/ticker.json";
+  return fetch(URL)
+    .then(response => {
       return response.json();
-  }).catch((e)=>{
-    console.error("Failed getting the ticker information", e);
-    return e;
-  })
+    })
+    .catch(e => {
+      console.error("Failed getting the ticker information", e);
+      return e;
+    });
 }
 
 function getDolar(exchangeValues) {
-  const URL = 'https://economia.awesomeapi.com.br/json/USD-BRL/1';
-  return fetch(URL).then((response) => {
-    console.log(response);
-    return exchangeValues;
-  }).catch((e) => {
-    console.error("Failed getting the dolar information", e);
-    return e;
-  })
+  const URL = "https://economia.awesomeapi.com.br/json/USD-BRL/1";
+  return fetch(URL)
+    .then(response => {
+      console.log(response);
+      return exchangeValues;
+    })
+    .catch(e => {
+      console.error("Failed getting the dolar information", e);
+      return e;
+    });
 }
 
 function calculateRatios(exchangeValues) {
@@ -69,7 +71,7 @@ function calculateRatios(exchangeValues) {
 
 function scheduleAlarm() {
   console.warn(`Scheduling refresh for ${pollIntervalInMin} minute(s)`);
-  chrome.alarms.create('refresh', { periodInMinutes: pollIntervalInMin });
+  chrome.alarms.create("refresh", { periodInMinutes: pollIntervalInMin });
 }
 
 function selectExchange(data) {
@@ -81,14 +83,13 @@ function startRequest({ shouldScheduleAlarm }) {
   // case where the extension process shuts down while this request is
   // outstanding.
   if (shouldScheduleAlarm) scheduleAlarm();
-  
+
   getTicker()
     .then(selectExchange)
-    .then(getDolar)
+    // .then(getDolar)
     .then(updateIcon)
-    .then(updatePopup)
-    .catch(console.log)
-  ;
+    // .then(updatePopup)
+    .catch(console.log);
 }
 
 ////////////////////////////////////////////
@@ -104,6 +105,6 @@ chrome.runtime.onInstalled.addListener(() => {
   startRequest({ shouldScheduleAlarm: true });
 });
 
-chrome.runtime.onStartup.addListener(()=>{
+chrome.runtime.onStartup.addListener(() => {
   startRequest({ shouldScheduleAlarm: true });
 });

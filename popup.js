@@ -1,12 +1,9 @@
-chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
-        if (request.msg === "update_exchanges") {
-            //  Update UI
-            console.log(request.data)
-        }
-    }
-);
-
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  if (request.msg === "update_exchanges") {
+    //  Update UI
+    console.log(request.data);
+  }
+});
 
 // /**
 //  * Get the current URL.
@@ -131,7 +128,6 @@ chrome.runtime.onMessage.addListener(
 //     });
 //   });
 // });
-
 
 // var filters = {
 //   // TODO(aa): Cannot use urlPrefix because all the url fields lack the protocol

@@ -15,5 +15,5 @@
     "default_title": "My Coins",
     "default_popup": "popup.html"
   },
-  "permissions": ["alarms"]
+  "permissions": ["alarms", "http://*/", "https://*/"]
 }
